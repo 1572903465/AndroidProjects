@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">한국</string>
+    <string name="button">나를 클릭합니다</string>
+    <string name="textView">안녕하세요, 세상！</string>
+    <string name="clicked">나는 클릭했다!</string>
+</resources>

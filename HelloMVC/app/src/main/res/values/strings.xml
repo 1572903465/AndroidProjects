@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Hello(MVC)</string>
+    <string name="button">确定</string>
+    <string name="textview">TextView</string>
+    <string-array name="list">
+        <item>快速</item>
+        <item>容易</item>
+        <item>新语言</item>
+        <item>面向对象</item>
+    </string-array>
+</resources>
