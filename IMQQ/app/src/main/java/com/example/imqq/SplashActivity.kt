@@ -3,14 +3,22 @@ package com.example.imqq
 import android.content.Intent
 import android.os.Handler
 import com.example.imqq.contract.SplashContract
+import com.example.imqq.presenter.SplashPresenter
 
 
 class SplashActivity :Baseactivity(),SplashContract.View{
+    val presenter = SplashPresenter(this)
+
     companion object{
         val DELAY = 2000L
     }
     val handler by lazy {
         Handler()
+    }
+
+    override fun  init(){
+        super.init()
+        presenter.checkLoginStatus()
     }
 
     override fun getLayoutResId(): Int =
