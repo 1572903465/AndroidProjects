@@ -8,6 +8,8 @@ import com.example.imqq.extentions.isValidPassword
 import com.example.imqq.extentions.isValidUserName
 import com.hyphenate.chat.EMClient
 import com.hyphenate.exceptions.HyphenateException
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class RegisterPresenter(val view: RegisterContract.View): RegisterContract.Presenter{
@@ -36,7 +38,7 @@ class RegisterPresenter(val view: RegisterContract.View): RegisterContract.Prese
                 if (e == null) {
                     //注册成功
                     //注册到环信
-//                    registerEaseMob(userName, password)
+                    registerEaseMob(userName, password)
                 } else {
                     //注册失败
                     if(e.errorCode == 202) view.onUserExist()
@@ -45,19 +47,18 @@ class RegisterPresenter(val view: RegisterContract.View): RegisterContract.Prese
             }
         })
     }
-//    private fun registerEaseMob(userName: String, password: String) {
-//        doAsync {
-//            try {
-//                //注册失败会抛出HyphenateException
-//                EMClient.getInstance().createAccount(userName, password);//同步方法
-//                //注册成功
-//                uiThread { view.onRegisterSuccess() }
-//            } catch (e: HyphenateException) {
-//                //注册失败
-//                uiThread { view.onRegisterFailed() }
-//            }
-//
-//        }
-//
-//    }
+    private fun registerEaseMob(userName: String, password: String) {
+        doAsync {
+            try {
+                //注册失败会抛出HyphenateException
+                EMClient.getInstance().createAccount(userName, password);//同步方法
+                //注册成功
+                uiThread { view.onRegisterSuccess() }
+            } catch (e: HyphenateException) {
+                //注册失败
+                uiThread { view.onRegisterFailed() }
+            }
+
+        }
+    }
 }

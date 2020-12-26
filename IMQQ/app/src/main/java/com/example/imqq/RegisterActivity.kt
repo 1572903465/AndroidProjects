@@ -50,6 +50,7 @@ class RegisterActivity :BaseActivity(), RegisterContract.View{
 
     override fun onRegisterSuccess() {
         dismissProgress()
+        Toast.makeText(this, R.string.register_success, Toast.LENGTH_SHORT).show()
         finish()
     }
 
@@ -59,7 +60,7 @@ class RegisterActivity :BaseActivity(), RegisterContract.View{
     }
 
     override fun onUserExist() {
-        TODO("Not yet implemented")
+        Toast.makeText(this, R.string.user_already_exist, Toast.LENGTH_SHORT).show()
     }
 
 }

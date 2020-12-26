@@ -50,5 +50,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.14.1'
     implementation 'com.squareup.okio:okio:2.2.2'
     implementation 'com.google.code.gson:gson:2.8.5'
+    compile "org.jetbrains.anko:anko-commons:$anko_version"//Anko通用库
+    compile "org.jetbrains.anko:anko-sqlite:$anko_version"//Anko sqlite库
 }
 
