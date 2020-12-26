@@ -8,4 +8,5 @@
         <item>新语言</item>
         <item>面向对象</item>
     </string-array>
+    <string name="createtextview">TextView</string>
 </resources>
