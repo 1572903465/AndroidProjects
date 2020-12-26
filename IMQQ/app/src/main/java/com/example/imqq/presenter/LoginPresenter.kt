@@ -1,7 +1,10 @@
 package com.example.imqq.presenter
 
+import com.example.imqq.adapter.EMCallBackAdapter
 import com.example.imqq.contract.LoginContract
 import com.example.imqq.extentions.*
+import com.hyphenate.EMCallBack
+import com.hyphenate.chat.EMClient
 
 class LoginPresenter(val view: LoginContract.Viwe): LoginContract.Presenter {
     override fun login(userName: String, password: String) {
@@ -16,6 +19,18 @@ class LoginPresenter(val view: LoginContract.Viwe): LoginContract.Presenter {
     }
 
     private fun loginEaseMob(userName: String, password: String) {
+        EMClient.getInstance().login(userName,password,object : EMCallBackAdapter() {
+            //在子线程回调
+            override fun onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                //在主线程通知View层
+               uiThread { view.onLoggedInsuccess()}
+            }
 
+            override fun onError(p0: Int, p1: String?) {
+                uiThread { view.onLoggedInfaild()}
+            }
+        })
     }
 }
