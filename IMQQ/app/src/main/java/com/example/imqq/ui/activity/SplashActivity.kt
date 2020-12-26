@@ -1,12 +1,13 @@
-package com.example.imqq
+package com.example.imqq.ui.activity
 
 import android.content.Intent
 import android.os.Handler
+import com.example.imqq.R
 import com.example.imqq.contract.SplashContract
 import com.example.imqq.presenter.SplashPresenter
 
 
-class SplashActivity :BaseActivity(),SplashContract.View{
+class SplashActivity : BaseActivity(),SplashContract.View{
     val presenter = SplashPresenter(this)
 
     companion object{
@@ -27,7 +28,8 @@ class SplashActivity :BaseActivity(),SplashContract.View{
     // 未登录延时2s，跳转到登录界面
     override fun onNotLoggedIn() {
         handler.postDelayed({ //  val intent = Intent<LoginActivity>()
-            val intent = Intent(this@SplashActivity,LoginActivity::class.java)
+            val intent = Intent(this@SplashActivity,
+                LoginActivity::class.java)
             startActivity(intent)
             finish()
         }, DELAY)
@@ -35,7 +37,8 @@ class SplashActivity :BaseActivity(),SplashContract.View{
 
         //跳转到主界面
     override fun onLoggedIn() {
-            val intent = Intent(this@SplashActivity,MainActivity::class.java)
+            val intent = Intent(this@SplashActivity,
+                MainActivity::class.java)
             startActivity(intent)
             finish()
     }

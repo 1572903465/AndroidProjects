@@ -1,4 +1,4 @@
-package com.example.imqq
+package com.example.imqq.ui.activity
 
 import android.app.ProgressDialog
 import android.content.Context

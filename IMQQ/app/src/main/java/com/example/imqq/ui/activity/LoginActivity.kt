@@ -1,10 +1,11 @@
-package com.example.imqq
+package com.example.imqq.ui.activity
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.example.imqq.R
 import com.example.imqq.contract.LoginContract
 import com.example.imqq.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
@@ -17,7 +18,7 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     override fun init() {
         super.init()
         newUser.setOnClickListener {
-            val intent = Intent(this,RegisterActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
         login.setOnClickListener {
@@ -53,7 +54,8 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             // 用户统一2权限，开始登录
             login()
-        }else Toast.makeText(this, R.string.permission_denied, Toast.LENGTH_SHORT).show()
+        }else Toast.makeText(this,
+            R.string.permission_denied, Toast.LENGTH_SHORT).show()
     }
 
     // 检查是有写磁盘的权限
@@ -80,7 +82,7 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         // 隐藏进度条
         dismissProgress()
         //进入主界面
-        val intent = Intent(this,MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         // 退出LoginACtivity
         finish()

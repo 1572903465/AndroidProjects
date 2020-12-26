@@ -1,13 +1,12 @@
-package com.example.imqq
+package com.example.imqq.ui.activity
 
-import android.view.KeyEvent
-import android.widget.TextView
 import android.widget.Toast
+import com.example.imqq.R
 import com.example.imqq.contract.RegisterContract
 import com.example.imqq.presenter.RegisterPresenter
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity :BaseActivity(), RegisterContract.View{
+class RegisterActivity : BaseActivity(), RegisterContract.View{
 
     val presenter = RegisterPresenter(this)
 
@@ -30,7 +29,8 @@ class RegisterActivity :BaseActivity(), RegisterContract.View{
          presenter.register(userNameString,passwordString,confirmPasswordString)
      }
 
-    override fun getLayoutResId(): Int = R.layout.activity_register
+    override fun getLayoutResId(): Int =
+        R.layout.activity_register
 
     override fun onUserNameError() {
         userName.error = getString(R.string.user_name_error)
