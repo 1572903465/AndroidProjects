@@ -11,23 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--        <com.itheima.im.widget.SlideBar-->
+<!--            android:id="@+id/slideBar"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="right"/>-->
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
-        </android.support.v4.widget.SwipeRefreshLayout>
+<!--        <android.support.v4.widget.SwipeRefreshLayout-->
+<!--            android:id="@+id/swipeRefreshLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
-        <com.itheima.im.widget.SlideBar
-            android:id="@+id/slideBar"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"/>
+<!--&lt;!&ndash;            <androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/recyclerView"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>&ndash;&gt;-->
+<!--        </android.support.v4.widget.SwipeRefreshLayout>-->
+
+
 
         <TextView
             android:id="@+id/section"
