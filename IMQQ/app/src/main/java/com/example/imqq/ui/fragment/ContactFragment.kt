@@ -1,13 +1,15 @@
 package com.example.imqq.ui.fragment
 
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imqq.R
 import com.example.imqq.adapter.ContactListAdapter
+import com.example.imqq.contract.ContactContract
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.header.*
 
-class ContactFragment:BaseFragment() {
+class ContactFragment:BaseFragment(),ContactContract.View{
     override fun getLayoutResId(): Int = R.layout.fragment_contacts
     override fun init() {
         super.init()
@@ -24,5 +26,14 @@ class ContactFragment:BaseFragment() {
             adapter = ContactListAdapter(context)
         }
 
+    }
+
+    override fun onLoadContactsSuccess() {
+        swipeRefreshLayout.isRefreshing = false
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    override fun onLoadContactsFailed() {
+        Toast.makeText(context, R.string.load_contacts_failed, Toast.LENGTH_SHORT).show()
     }
 }
