@@ -6,7 +6,7 @@ import com.example.imqq.contract.SplashContract
 import com.example.imqq.presenter.SplashPresenter
 
 
-class SplashActivity :Baseactivity(),SplashContract.View{
+class SplashActivity :BaseActivity(),SplashContract.View{
     val presenter = SplashPresenter(this)
 
     companion object{
