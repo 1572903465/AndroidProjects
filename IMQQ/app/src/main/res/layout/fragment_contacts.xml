@@ -17,17 +17,15 @@
 <!--            android:layout_height="match_parent"-->
 <!--            android:layout_gravity="right"/>-->
 
-<!--        <android.support.v4.widget.SwipeRefreshLayout-->
-<!--            android:id="@+id/swipeRefreshLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--&lt;!&ndash;            <androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/recyclerView"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>&ndash;&gt;-->
-<!--        </android.support.v4.widget.SwipeRefreshLayout>-->
-
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
         <TextView
