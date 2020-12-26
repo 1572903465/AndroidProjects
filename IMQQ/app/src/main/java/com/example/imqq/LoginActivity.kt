@@ -1,11 +1,33 @@
 package com.example.imqq
 
 import android.content.Intent
+import android.view.KeyEvent
+import android.widget.TextView
 import android.widget.Toast
 import com.example.imqq.contract.LoginContract
+import com.example.imqq.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), LoginContract.Viwe {
+
+    val presenter = LoginPresenter(this)
+
+    override fun init() {
+        super.init()
+        login.setOnClickListener {
+            login()
+        }
+        password.setOnEditorActionListener { p0, p1, p2 ->
+            login()
+            true
+        }
+    }
+    fun login(){
+        val userNameString = userName.text.trim().toString()
+        val passwordString = password.text.trim().toString()
+        presenter.login(userNameString,passwordString)
+    }
+
     override fun getLayoutResId(): Int = R.layout.activity_login
     override fun onUserNameError() {
         userName.error = getString(R.string.user_name_error)
