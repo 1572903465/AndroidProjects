@@ -5,7 +5,7 @@ interface LoginContract {
         fun login(userName: String,password: String)
     }
 
-    interface Viwe {
+    interface View {
         fun onUserNameError()
         fun onPasswordError()
         fun onStartLogin()
