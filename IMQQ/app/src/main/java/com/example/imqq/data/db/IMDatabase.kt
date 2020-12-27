@@ -33,6 +33,4 @@ class IMDatabase{
             delete(ContactTable.NAME, null, null)
         }
     }
-
-
 }
