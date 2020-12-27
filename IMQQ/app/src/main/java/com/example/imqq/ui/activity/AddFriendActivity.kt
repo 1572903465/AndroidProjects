@@ -16,6 +16,7 @@ class AddFriendActivity :BaseActivity(),AddFriendContract.View{
     override fun init() {
         super.init()
         headerTitle.text = getString(R.string.add_friend)
+//        serach()
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
@@ -37,11 +38,11 @@ class AddFriendActivity :BaseActivity(),AddFriendContract.View{
     override fun onSearchSuccess() {
         dismissProgress()
         toast(R.string.search_success)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onSearchFailed() {
         dismissProgress()
         toast(R.string.search_failed)
-        recyclerView.adapter?.notifyDataSetChanged()
     }
 }

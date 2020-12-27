@@ -11,16 +11,19 @@ import com.example.imqq.widget.AddFriendListItemView
 
 class AddFriendListAdapter(
     val context: Context,
-    val addFriendItems: MutableList<AddFriendItem>
+    val addFrienditems: MutableList<AddFriendItem>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AddFriendListItemViewHolder(AddFriendListItemView(context))
     }
 
-    override fun getItemCount(): Int =addFriendItems.size
+    override fun getItemCount(): Int = addFrienditems.size
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val addFriendListItemView = holder.itemView as AddFriendListItemView
-        addFriendListItemView.bindView(addFriendItems[position])
+        val addFriendListItemView = holder?.itemView as AddFriendListItemView
+//        if(addFrienditems != null && addFrienditems.size!=0){
+//            addFriendListItemView.bindView(addFrienditems[position])
+//        }
+        addFriendListItemView.bindView(addFrienditems[position])
     }
     class AddFriendListItemViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
