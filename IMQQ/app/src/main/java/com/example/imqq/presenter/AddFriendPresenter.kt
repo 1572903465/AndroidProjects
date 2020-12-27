@@ -1,5 +1,6 @@
 package com.example.imqq.presenter
 
+import android.util.Log
 import cn.bmob.v3.BmobQuery
 import cn.bmob.v3.BmobUser
 import cn.bmob.v3.exception.BmobException
@@ -14,6 +15,7 @@ class AddFriendPresenter(val view: AddFriendContract.View): AddFriendContract.Pr
             .addWhereNotEqualTo("username",EMClient.getInstance().currentUser)
         query.findObjects(object : FindListener<BmobUser>(){
             override fun done(p0: MutableList<BmobUser>?, p1: BmobException?) {
+                Log.d("BMob", p1.toString())
                 if (p1 == null) view.onSearchSuccess()
                 else view.onSearchFailed()
             }

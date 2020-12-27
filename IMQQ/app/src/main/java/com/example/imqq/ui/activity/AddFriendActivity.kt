@@ -38,12 +38,12 @@ class AddFriendActivity :BaseActivity(),AddFriendContract.View{
 
     override fun onSearchSuccess() {
         dismissProgress()
-        toast(R.string.search_failed)
+        toast(R.string.search_success)
     }
 
     override fun onSearchFailed() {
         dismissProgress()
-        toast(R.string.search_success)
+        toast(R.string.search_failed)
         recyclerView.adapter?.notifyDataSetChanged()
     }
 }
