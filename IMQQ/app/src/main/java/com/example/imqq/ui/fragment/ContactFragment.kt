@@ -1,5 +1,6 @@
 package com.example.imqq.ui.fragment
 
+import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,6 +8,7 @@ import com.example.imqq.R
 import com.example.imqq.adapter.ContactListAdapter
 import com.example.imqq.contract.ContactContract
 import com.example.imqq.presenter.ContactPresenter
+import com.example.imqq.ui.activity.AddFriendActivity
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.header.*
 
@@ -18,6 +20,10 @@ class ContactFragment:BaseFragment(),ContactContract.View{
         super.init()
         headerTitle.text = getString(R.string.contact)
         add.visibility = View.VISIBLE
+        add.setOnClickListener{
+            val intent = Intent(context,AddFriendActivity::class.java)
+            startActivity(intent)
+        }
 
         swipeRefreshLayout.apply {
             setColorSchemeResources(R.color.qq_blue)
