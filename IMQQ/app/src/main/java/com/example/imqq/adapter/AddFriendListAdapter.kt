@@ -20,9 +20,6 @@ class AddFriendListAdapter(
     override fun getItemCount(): Int = addFrienditems.size
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val addFriendListItemView = holder?.itemView as AddFriendListItemView
-//        if(addFrienditems != null && addFrienditems.size!=0){
-//            addFriendListItemView.bindView(addFrienditems[position])
-//        }
         addFriendListItemView.bindView(addFrienditems[position])
     }
     class AddFriendListItemViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
