@@ -1,7 +1,5 @@
 package com.example.imqq.ui.activity
 
-import android.view.KeyEvent
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imqq.R
 import com.example.imqq.adapter.AddFriendListAdapter
@@ -21,7 +19,7 @@ class AddFriendActivity :BaseActivity(),AddFriendContract.View{
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = AddFriendListAdapter(context)
+            adapter = AddFriendListAdapter(context,presenter.addFrienditems)
         }
         search.setOnClickListener { serach() }
         userName.setOnEditorActionListener { p0, p1, p2 ->

@@ -1,6 +1,7 @@
 package com.example.imqq.ui.fragment
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,7 @@ class ContactFragment:BaseFragment(),ContactContract.View{
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
+            Log.d("contactListItem",presenter.contactListItems.size.toString())
             adapter = ContactListAdapter(context,presenter.contactListItems)
         }
 
