@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.imqq.R
@@ -70,7 +71,7 @@ class SlideBar(context: Context?, attrs: AttributeSet? = null) : View(context, a
                 //找到点击的字母
                 val index = getTouchIndex(event)
                 val firstLetter = SECTIONS[index]
-                println(firstLetter)
+                Log.d("Letter",firstLetter)
                 onSectionChangeListener?.onSectionChange(firstLetter)
             }
             MotionEvent.ACTION_UP -> {
@@ -78,7 +79,7 @@ class SlideBar(context: Context?, attrs: AttributeSet? = null) : View(context, a
                 onSectionChangeListener?.onSlideFinish()
             }
         }
-        return true//消费事件
+        return true
     }
 
     //获取到点击位置的字母的下标

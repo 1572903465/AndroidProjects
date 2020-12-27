@@ -11,6 +11,7 @@ import com.example.imqq.adapter.EMContactListenerAdapter
 import com.example.imqq.contract.ContactContract
 import com.example.imqq.presenter.ContactPresenter
 import com.example.imqq.ui.activity.AddFriendActivity
+import com.example.imqq.widget.SlideBar
 import com.hyphenate.EMContactListener
 import com.hyphenate.chat.EMClient
 import kotlinx.android.synthetic.main.fragment_contacts.*
@@ -47,6 +48,18 @@ class ContactFragment:BaseFragment(),ContactContract.View{
                 presenter.loadContacts()
             }
         })
+
+        slideBar.onSectionChangeListener = object : SlideBar.OnSectionChangeListener {
+            override fun onSectionChange(firstLetter: String) {
+                section.visibility = View.VISIBLE
+                section.text = firstLetter
+            }
+
+            override fun onSlideFinish() {
+                section.visibility = View.GONE
+            }
+
+        }
         presenter.loadContacts()
 
     }
