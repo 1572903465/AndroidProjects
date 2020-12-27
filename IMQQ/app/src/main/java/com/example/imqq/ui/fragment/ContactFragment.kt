@@ -28,7 +28,7 @@ class ContactFragment:BaseFragment(),ContactContract.View{
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = ContactListAdapter(context)
+            adapter = ContactListAdapter(context,presenter.contactListItems)
         }
 
         presenter.loadContacts()
