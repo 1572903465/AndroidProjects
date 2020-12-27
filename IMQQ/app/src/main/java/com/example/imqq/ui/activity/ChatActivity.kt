@@ -25,7 +25,7 @@ class ChatActivity:BaseActivity(),ChatContract.View {
     lateinit var username: String
 
     val messageListener = object:EMMessageListenerAdapter() {
-        override fun onMessageRecalled(p0: MutableList<EMMessage>?) {
+        override fun onMessageReceived(p0: MutableList<EMMessage>?) {
             presenter.addMessage(username,p0)
             runOnUiThread { recyclerView.adapter?.notifyDataSetChanged() }
         }
