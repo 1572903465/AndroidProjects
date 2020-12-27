@@ -11,21 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--        <com.itheima.im.widget.SlideBar-->
-<!--            android:id="@+id/slideBar"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="right"/>-->
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.example.imqq.widget.SlideBar
+            android:id="@+id/slideBar"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right" />
 
 
         <TextView

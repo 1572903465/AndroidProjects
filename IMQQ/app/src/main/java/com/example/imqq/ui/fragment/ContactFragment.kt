@@ -7,9 +7,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imqq.R
 import com.example.imqq.adapter.ContactListAdapter
+import com.example.imqq.adapter.EMContactListenerAdapter
 import com.example.imqq.contract.ContactContract
 import com.example.imqq.presenter.ContactPresenter
 import com.example.imqq.ui.activity.AddFriendActivity
+import com.hyphenate.EMContactListener
+import com.hyphenate.chat.EMClient
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.header.*
 
@@ -38,7 +41,12 @@ class ContactFragment:BaseFragment(),ContactContract.View{
             Log.d("contactListItem",presenter.contactListItems.size.toString())
             adapter = ContactListAdapter(context,presenter.contactListItems)
         }
-
+        EMClient.getInstance().contactManager().setContactListener(object : EMContactListenerAdapter() {
+            override fun onContactDeleted(p0: String?) {
+               // 重新获取联系人数据
+                presenter.loadContacts()
+            }
+        })
         presenter.loadContacts()
 
     }
