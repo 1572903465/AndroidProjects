@@ -12,9 +12,7 @@ import com.hyphenate.util.DateUtils
 import kotlinx.android.synthetic.main.view_send_message_item.view.*
 import java.util.*
 
-/**
- * 黑马程序员
- */
+
 
 class SendMessageItemView(context: Context?, attrs: AttributeSet? = null) : RelativeLayout(context, attrs) {
 

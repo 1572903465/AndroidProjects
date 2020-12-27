@@ -11,9 +11,6 @@ import com.hyphenate.util.DateUtils
 import kotlinx.android.synthetic.main.view_receive_message_item.view.*
 import java.util.*
 
-/**
- * 黑马程序员
- */
 
 class ReceiveMessageItemView(context: Context?, attrs: AttributeSet? = null) : RelativeLayout(context, attrs) {
 
