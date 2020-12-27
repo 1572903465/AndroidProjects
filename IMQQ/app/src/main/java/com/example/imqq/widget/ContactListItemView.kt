@@ -12,7 +12,11 @@ import kotlinx.android.synthetic.main.view_contact_item.view.*
 
 class ContactListItemView(context: Context?, attrs: AttributeSet?=null) : RelativeLayout(context, attrs) {
     fun bindView(contactListItem: ContactListItem) {
-        firstLetter.text  = contactListItem.firstLetter.toString()
+        if (contactListItem.showFirtLetter){
+            firstLetter.visibility = View.VISIBLE
+            firstLetter.text  = contactListItem.firstLetter.toString()
+        } else    firstLetter.visibility = View.GONE
+
         userName.text = contactListItem.userName
     }
 
