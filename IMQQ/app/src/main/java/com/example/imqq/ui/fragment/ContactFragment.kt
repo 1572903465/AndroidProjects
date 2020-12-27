@@ -30,6 +30,7 @@ class ContactFragment : BaseFragment(), ContactContract.View {
 
         override fun onContactAdded(p0: String?) {
             // 重新获取联系人数据
+            Toast.makeText(context, "添加联系人成功", Toast.LENGTH_SHORT).show()
             presenter.loadContacts()
         }
     }
