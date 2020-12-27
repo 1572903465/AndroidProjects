@@ -40,6 +40,7 @@ class ChatActivity:BaseActivity(),ChatContract.View {
         initRecyclerView()
         EMClient.getInstance().chatManager().addMessageListener(messageListener)
         send.setOnClickListener { send() }
+        presenter.loadMessages(username)
     }
 
     private fun initRecyclerView() {
@@ -112,7 +113,8 @@ class ChatActivity:BaseActivity(),ChatContract.View {
     }
 
     override fun onMessageLoaded() {
-
+        recyclerView.adapter?.notifyDataSetChanged()
+        scrollBottom()
     }
 
     override fun onMoreMessageLoaded(size: Int) {
@@ -123,4 +125,5 @@ class ChatActivity:BaseActivity(),ChatContract.View {
         super.onDestroy()
         EMClient.getInstance().chatManager().removeMessageListener(messageListener)
     }
+
 }
