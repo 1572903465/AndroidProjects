@@ -37,7 +37,6 @@ class AddFriendListItemView(context: Context?,attrs: AttributeSet? = null):Relat
             override fun onSuccess() {
                 context.runOnUiThread { toast(R.string.send_add_friend_success) }
             }
-
             override fun onError(p0: Int, p1: String?) {
                 context.runOnUiThread { toast(R.string.send_add_friend_failed) }
             }

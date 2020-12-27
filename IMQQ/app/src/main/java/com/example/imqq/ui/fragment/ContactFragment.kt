@@ -17,38 +17,34 @@ import com.hyphenate.chat.EMClient
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.header.*
 
-class ContactFragment:BaseFragment(),ContactContract.View{
+class ContactFragment : BaseFragment(), ContactContract.View {
     override fun getLayoutResId(): Int = R.layout.fragment_contacts
 
     val presenter = ContactPresenter(this)
+
+    val contactListener = object : EMContactListenerAdapter() {
+        override fun onContactDeleted(p0: String?) {
+            // 重新获取联系人数据
+            presenter.loadContacts()
+        }
+
+        override fun onContactAdded(p0: String?) {
+            // 重新获取联系人数据
+            presenter.loadContacts()
+        }
+    }
     override fun init() {
         super.init()
-        headerTitle.text = getString(R.string.contact)
-        add.visibility = View.VISIBLE
-        add.setOnClickListener{
-            val intent = Intent(context,AddFriendActivity::class.java)
-            startActivity(intent)
-        }
+        initHeader()
+        initSwipeRefreshLayout()
+        initRecyclerView()
+        EMClient.getInstance().contactManager().setContactListener(contactListener)
+        initSlidebar()
+        presenter.loadContacts()
 
-        swipeRefreshLayout.apply {
-            setColorSchemeResources(R.color.qq_blue)
-            swipeRefreshLayout.isRefreshing = true
-            setOnRefreshListener { presenter.loadContacts() }
-        }
+    }
 
-        recyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            Log.d("contactListItem",presenter.contactListItems.size.toString())
-            adapter = ContactListAdapter(context,presenter.contactListItems)
-        }
-        EMClient.getInstance().contactManager().setContactListener(object : EMContactListenerAdapter() {
-            override fun onContactDeleted(p0: String?) {
-               // 重新获取联系人数据
-                presenter.loadContacts()
-            }
-        })
-
+    private fun initSlidebar() {
         slideBar.onSectionChangeListener = object : SlideBar.OnSectionChangeListener {
             override fun onSectionChange(firstLetter: String) {
                 section.visibility = View.VISIBLE
@@ -61,12 +57,37 @@ class ContactFragment:BaseFragment(),ContactContract.View{
             }
 
         }
-        presenter.loadContacts()
-
     }
+
+    private fun initRecyclerView() {
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            Log.d("contactListItem", presenter.contactListItems.size.toString())
+            adapter = ContactListAdapter(context, presenter.contactListItems)
+        }
+    }
+
+    private fun initSwipeRefreshLayout() {
+        swipeRefreshLayout.apply {
+            setColorSchemeResources(R.color.qq_blue)
+            swipeRefreshLayout.isRefreshing = true
+            setOnRefreshListener { presenter.loadContacts() }
+        }
+    }
+
+    private fun initHeader() {
+        headerTitle.text = getString(R.string.contact)
+        add.visibility = View.VISIBLE
+        add.setOnClickListener {
+            val intent = Intent(context, AddFriendActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     fun getPosition(firstLetter: String): Int =
-        presenter.contactListItems.binarySearch {
-            contactListItem -> contactListItem.firstLetter.minus(firstLetter[0])
+        presenter.contactListItems.binarySearch { contactListItem ->
+            contactListItem.firstLetter.minus(firstLetter[0])
         }
 
 
@@ -77,5 +98,10 @@ class ContactFragment:BaseFragment(),ContactContract.View{
 
     override fun onLoadContactsFailed() {
         Toast.makeText(context, R.string.load_contacts_failed, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EMClient.getInstance().contactManager().removeContactListener(contactListener)
     }
 }
