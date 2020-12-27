@@ -11,6 +11,10 @@ import com.example.imqq.R
 import com.example.imqq.data.ContactListItem
 import com.example.imqq.ui.activity.ChatActivity
 import com.example.imqq.widget.ContactListItemView
+import com.hyphenate.EMCallBack
+import com.hyphenate.chat.EMClient
+import org.jetbrains.anko.runOnUiThread
+import org.jetbrains.anko.toast
 
 class ContactListAdapter(
     val context: Context,
@@ -45,7 +49,16 @@ class ContactListAdapter(
         }
     }
     private fun  deleteFriend(userName: String){
+        EMClient.getInstance().contactManager().aysncDeleteContact(userName,object : EMCallBackAdapter(){
+            override fun onSuccess() {
+                context.runOnUiThread { toast(R.string.delete_friend_success) }
+            }
 
+            override fun onError(p0: Int, p1: String?) {
+                context.runOnUiThread { toast(R.string.delete_friend_failed) }
+            }
+
+        })
     }
     class ContactListItemViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
