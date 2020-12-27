@@ -63,10 +63,10 @@ class IMApplication: Application() {
             }
             val intent = Intent(this, ChatActivity::class.java)
             intent.putExtra("username", it.conversationId())
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-//            val taskStackBuilder = TaskStackBuilder.create(this).addParentStack(ChatActivity::class.java).addNextIntent(intent)
-//            val pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            val taskStackBuilder = TaskStackBuilder.create(this).addParentStack(ChatActivity::class.java).addNextIntent(intent)
+            val pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
             val notification = Notification.Builder(this)
                 .setContentTitle(getString(R.string.receive_new_message))
                 .setContentText(contentText)
@@ -74,7 +74,7 @@ class IMApplication: Application() {
                 .setSmallIcon(R.mipmap.ic_contact)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
-                .notification
+                .build()
             notificationManager.notify(1, notification)
         }
     }
