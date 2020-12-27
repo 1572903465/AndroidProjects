@@ -2,9 +2,12 @@ package com.example.imqq.ui.activity
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
+import android.widget.TextView
 import com.example.imqq.R
 import com.example.imqq.contract.ChatContract
+import com.example.imqq.presenter.ChatPresenter
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.header.*
 import org.jetbrains.anko.toast
@@ -12,10 +15,19 @@ import org.jetbrains.anko.toast
 class ChatActivity:BaseActivity(),ChatContract.View {
     override fun getLayoutResId(): Int = R.layout.activity_chat
 
+    val presenter = ChatPresenter(this)
+    lateinit var username: String
     override fun init() {
         super.init()
         initHeader()
         initEditTest()
+        send.setOnClickListener { send() }
+    }
+
+    fun send(){
+        hideSoftKeyboard()
+        val message = edit.text.trim().toString()
+        presenter.sendMessage(username,message)
     }
 
     private fun initEditTest() {
@@ -34,12 +46,16 @@ class ChatActivity:BaseActivity(),ChatContract.View {
             }
 
         })
+        edit.setOnEditorActionListener { p0, p1, p2 ->
+            send()
+            true
+        }
     }
 
     private fun initHeader() {
         back.visibility = View.VISIBLE
         back.setOnClickListener { finish() }
-        val username = intent.getStringExtra("username")
+        username = intent.getStringExtra("username").toString()
         val titleString = String.format(getString(R.string.chat_title),username)
         headerTitle.text = titleString
 
