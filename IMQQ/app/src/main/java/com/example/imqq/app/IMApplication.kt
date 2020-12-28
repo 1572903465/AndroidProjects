@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.AudioManager
 import android.media.SoundPool
+import android.os.Build
+import android.util.Log
 import cn.bmob.v3.Bmob
 import com.example.imqq.BuildConfig
 import com.example.imqq.R
@@ -20,7 +22,7 @@ class IMApplication: Application() {
     companion object{
         lateinit var  instance: IMApplication
     }
-
+    val Channel_ID = "mu channel"
     val soundPool = SoundPool(2, AudioManager.STREAM_MUSIC, 0)
     val duan by lazy {
         soundPool.load(instance, R.raw.duan, 0)
@@ -33,11 +35,13 @@ class IMApplication: Application() {
     val messageListener = object : EMMessageListenerAdapter(){
         override fun onMessageReceived(p0: MutableList<EMMessage>?) {
             //如果是在前台，则播放短的声音
+            Log.d("sooo", "ppppppppp")
             if (isForeground()){
                 soundPool.play(duan, 1f, 1f, 0, 0, 1f)
             } else {
                 //如果在后台，则播放长的声音
                 soundPool.play(yulu, 1f, 1f, 0, 0, 1f)
+
                 showNotification(p0)
             }
         }
@@ -57,6 +61,7 @@ class IMApplication: Application() {
     private fun showNotification(p0: MutableList<EMMessage>?) {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         p0?.forEach {
+            Log.d("sooo", "hhhhhhhhhhhhh")
             var contentText = getString(R.string.no_text_message)
             if (it.type == EMMessage.Type.TXT){
                 contentText = (it.body as EMTextMessageBody).message
@@ -64,10 +69,17 @@ class IMApplication: Application() {
             val intent = Intent(this, ChatActivity::class.java)
             intent.putExtra("username", it.conversationId())
 //            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
+            val builder: Notification.Builder
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val notificationChannel = NotificationChannel(Channel_ID,"test",NotificationManager.IMPORTANCE_DEFAULT)
+                notificationManager.createNotificationChannel(notificationChannel)
+                builder = Notification.Builder(this,Channel_ID)
+            }else {
+                builder = Notification.Builder(this)
+            }
             val taskStackBuilder = TaskStackBuilder.create(this).addParentStack(ChatActivity::class.java).addNextIntent(intent)
             val pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-            val notification = Notification.Builder(this)
+            val notification = builder
                 .setContentTitle(getString(R.string.receive_new_message))
                 .setContentText(contentText)
                 .setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.avatar1))
